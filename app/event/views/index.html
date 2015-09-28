@@ -12,8 +12,7 @@
       <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events">
          <div class="card">
              <div class="item item-text-wrap">
-                 <h2 ng-bind="event['Food']"></h2>
-                 <h2> On </h2>
+                 <h2 style="font-weight:bold;font-size:1.1em;" ng-bind="event['Food']"></h2>                
                  <h2 ng-bind="event['Date']"></h2>
                  <h2 ng-bind="event['Time']"></h2>
              </div>
