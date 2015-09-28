@@ -1,0 +1,49 @@
+<div ng-controller="ShowController">
+  <super-navbar>
+    <super-navbar-title ng-bind="event['Food']">
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+
+      
+      
+         <div class="list card">
+             <div class="item item-avatar">
+                 <img src="/icons/who_icon.png" style="width:40px;height:40px;">
+                 <h2 ng-bind="event['Who']"></h2>
+             </div>
+             <div class="item item-avatar">
+                 <img src="/icons/date_icon.png">
+                 <h2 ng-bind="event['Date']"></h2>
+             </div>
+             <div class="item item-avatar">
+                 <img src="/icons/time_icon.png">
+                 <h2 ng-bind="event['Time']"></h2>
+             </div>
+             <div class="item item-avatar">
+                 <img src="/icons/location_icon.png">
+                 <h2 ng-bind="event['Location']"></h2>
+             </div>
+             <div class="item item-avatar">
+                 <img src="/icons/org_icon.png">
+                 <h2 ng-bind="event['Organization']"></h2>
+             </div>
+             </div>
+      
+
+
+   <!--   <super-modal-show location="event#edit?id={{ event.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="remove(event.id)" class="button button-block button-negative">
+        Remove
+      </button> -->
+    </div>
+  </div>
+</div>
