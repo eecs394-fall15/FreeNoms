@@ -4,6 +4,11 @@ angular
     $scope.event = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
+    
+    $scope.loadGoogleMaps = function(){
+        var link = "https://www.google.com/maps/place/" +          $scope.event.Location.replace(/\s/g,"+");
+        return link;
+    }
 
     var _refreshViewData = function () {
       Event.find($scope.dataId).then( function (event) {
