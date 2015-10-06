@@ -3,8 +3,25 @@
 module.exports =
 
 
-   rootView:
-     location: "event#index"
+ #  rootView:
+  #   location: "event#index"
+tabs: [
+    {
+      title: "Index"
+      id: "index"
+      location: "event#index" # Supersonic module#view type navigation
+    }
+    {
+        title:"Datetime"
+        id: "DateTime"
+        location: "example#getting-started"
+    }
+    {
+        title:"Maps"
+        id: "Maps"
+        location: "maps#index"
+    }
+  ] 
 
   preloads: [
     {

@@ -1,25 +1,35 @@
-<div class="padding">
+<html ng-app="mgcrea.ngStrapDocs">
+  <head>
+   <script src="//cdn.jsdelivr.net/angularjs/1.4.5/angular-animate.min.js" data-semver="1.4.5"></script>
+    <script src="//cdn.jsdelivr.net/angularjs/1.4.5/angular-sanitize.min.js" data-semver="1.4.5"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.2"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.2"></script>
+    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.2"></script>
+  </head>
 
-  <super-navbar>
-    <super-navbar-title>
-      Welcome to Supersonic!
-    </super-navbar-title>
-  </super-navbar>
+  <body ng-controller="MainCtrl">
 
-  <p>Awesome! This file is located at <strong>app/example/views/getting-started.html</strong> &mdash; open it, change some text and save the file. The changes are updated to all connected devices. Cool, huh?</p>
+<div class="bs-docs-section" ng-controller="TimepickerDemoCtrl">
 
-  <p>Below, you can see our multi-page navigation in action. Tap on a button to move to a new view.</p>
 
-  <super-navigate view-id="using-the-scanner">
-    <button class="button button-block button-positive icon-left super-wand">Using the AppGyver Scanner</button>
-  </super-navigate>
+  <div class="bs-example" append-source>
+    <form name="timepickerForm" class="form-inline" role="form">
 
-  <super-navigate view-id="learn-more">
-    <button class="button button-block button-positive icon-left super-university">Learn more</button>
-  </super-navigate>
+      <!-- Datetime example -->
+      <div class="form-group">
+        <label class="control-label"><i class="fa fa-calendar"></i> Datetime picker</label><br>
+        <div class="form-group">
+          <input type="text" size="10" class="form-control" ng-model="sharedDate" data-autoclose="1" placeholder="Date" bs-datepicker>
+        </div>
+        <div class="form-group">
+          <input type="text" size="8" class="form-control" ng-model="sharedDate" data-time-format="h:mm:ss a" data-autoclose="1" placeholder="Time" bs-timepicker>
+        </div>
+      </div>
 
-  <h2>Get in touch with us!</h2>
-
-  <p>Feel free to contact us at <a href="mailto:contact@appgyver.com">contact@appgyver.com</a>, we would love to get your feedback!</p>
-
+    </form>
+  </div>
 </div>
+
+  </body>
+
+</html>

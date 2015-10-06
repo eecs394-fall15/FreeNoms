@@ -1,8 +1,34 @@
 {
-  "tabs": [],
-  "rootView": {
-    "location": "http://localhost/app/event/index.html"
-  },
+  "preloads": [
+    {
+      "id": "learn-more",
+      "location": "http://localhost/app/example/learn-more.html"
+    },
+    {
+      "id": "using-the-scanner",
+      "location": "http://localhost/app/example/using-the-scanner.html"
+    }
+  ],
+  "tabs": [
+    {
+      "position": 0,
+      "id": "index",
+      "title": "Index",
+      "target_url": "http://localhost/app/event/index.html"
+    },
+    {
+      "position": 1,
+      "id": "DateTime",
+      "title": "Datetime",
+      "target_url": "http://localhost/app/example/getting-started.html"
+    },
+    {
+      "position": 2,
+      "id": "Maps",
+      "title": "Maps",
+      "target_url": "http://localhost/app/maps/index.html"
+    }
+  ],
   "configuration": {
     "extra_response_headers": {}
   }
