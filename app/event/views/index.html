@@ -12,7 +12,7 @@
   <div ng-hide="showSpinner">
     <ul class="list" ng-hide="events.length == 0">
 
-      <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events | orderBy : '-Date': reverse = true">
+      <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events | orderBy : ['Date', 'Time'] ">
          <div class="card">
              <div class="item item-text-wrap">
                  <h2 style="font-weight:bold;font-size:1.1em;" ng-bind="event['Food']"></h2>                
