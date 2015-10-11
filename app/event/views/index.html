@@ -20,8 +20,8 @@
              <div class="item item-text-wrap">
                  <h2 style="font-weight:bold;font-size:1.1em;" ng-bind="event['Food']"></h2>  
                  <h2 ng-bind="event['Date'] | date: 'MMMM dd, yyyy' "></h2>
-                 <h2 ng-bind="event['StartTime'] | date: 'shortTime' "></h2>
-                 <h2 ng-bind="event['EndTime'] | date: 'shortTime' "></h2>
+                 <span ng-bind="event['StartTime'] | date: 'shortTime' "></span>
+                 <span ng-bind="event['EndTime'] | date: 'shortTime' "></span>
              </div>
              </div>
       </super-navigate>
