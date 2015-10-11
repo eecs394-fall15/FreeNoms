@@ -15,12 +15,12 @@
   <div ng-hide="showSpinner">
     <ul class="list" ng-hide="events.length == 0">
 
-      <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events | orderBy : ['Date', 'Time'] ">
+      <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events | orderBy : ['Date', 'StartTime'] ">
          <div class="card">
              <div class="item item-text-wrap">
                  <h2 style="font-weight:bold;font-size:1.1em;" ng-bind="event['Food']"></h2>                
-                 <h2 ng-bind="event['Date'] | date: 'MMMM dd, yyyy' "></h2>
-                 <h2 ng-bind="event['Time'] | date: 'shortTime' "></h2>
+                 <h2 ng-bind="event['StartTime'] | date: 'shortTime' "></h2>
+                 <h2 ng-bind="event['EndTime'] | date: 'shortTime' "></h2>
              </div>
              </div>
       </super-navigate>
