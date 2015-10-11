@@ -23,15 +23,19 @@
                  <img src="/icons/time_icon.png">
                  <h2 ng-bind="event['Time'] | date: 'shortTime'"></h2>
              </div>
-             <a ng-href="{{loadGoogleMaps()}}"  style="text-decoration:none">
-             <div class="item item-avatar">
+
+             <div class="item item-avatar">      
                  <img src="/icons/location_icon.png">
+                 <a ng-href="{{loadGoogleMaps()}}"  style="text-decoration:none">
                  <h2 ng-bind="event['Location']"></h2>
+                 </a>
              </div>
-             </a>
+             
              <div class="item item-avatar">
                  <img src="/icons/org_icon.png">
+                 <a ng-href="{{event['Website']}}" style="text-decoration:none">
                  <h2 ng-bind="event['Organization']"></h2>
+                 </a>
              </div>
              </div>
       

@@ -31,6 +31,20 @@ angular
 
 angular
   .module('event')
+  .controller("EventMapController", function ($scope, Event, supersonic) {
+    $scope.events = null;
+    $scope.showSpinner = true;
+
+    Event.all().whenChanged( function (events) {
+        $scope.$apply( function () {
+          $scope.events = events;
+          $scope.showSpinner = false;
+        });
+    });
+  });
+
+angular
+  .module('event')
   .constant('Event', supersonic.data.model('Event'));
 angular
   .module('event')
@@ -69,6 +83,11 @@ angular
     $scope.event = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
+    
+    $scope.loadGoogleMaps = function(){
+        var link = "https://www.google.com/maps/place/" + $scope.event.Location.replace(/\s/g,"+");
+        return link;
+    }
 
     var _refreshViewData = function () {
       Event.find($scope.dataId).then( function (event) {

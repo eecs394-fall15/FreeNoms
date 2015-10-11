@@ -6,7 +6,7 @@ angular
     $scope.dataId = undefined;
     
     $scope.loadGoogleMaps = function(){
-        var link = "https://www.google.com/maps/dir//" + $scope.event.Location.replace(/\s/g,"+");
+        var link = "https://www.google.com/maps/place/" + $scope.event.Location.replace(/\s/g,"+");
         return link;
     }
 

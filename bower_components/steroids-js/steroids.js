@@ -1,4 +1,4 @@
-/*! steroids-js - v3.5.14 - 2015-08-17 12:34 */
+/*! steroids-js - v3.5.16 - 2015-10-01 13:45 */
 (function(window){
 var Bridge,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -790,12 +790,15 @@ Events = (function() {
   return Events;
 
 }).call(this);
-;var EventsSupport;
+;var EventsSupport,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 EventsSupport = (function() {
   function EventsSupport(prefixName, validEvents) {
     this.prefixName = prefixName;
     this.validEvents = validEvents;
+    this.off = __bind(this.off, this);
+    this.on = __bind(this.on, this);
   }
 
   EventsSupport.eventCounter = Date.now();
@@ -1121,7 +1124,7 @@ Animation = (function() {
       callbacks = {};
     }
     return steroids.nativeBridge.nativeCall({
-      method: "performTransition",
+      method: "performAnimation",
       parameters: {
         transition: this.transition,
         curve: options.curve || this.curve,
@@ -1308,11 +1311,20 @@ Modal = (function(_super) {
       });
     }
     switch (view.constructor.name) {
+      case "MediaGalleryView":
+        return steroids.nativeBridge.nativeCall({
+          method: "showMediaGallery",
+          parameters: {
+            files: view.getNativeFilePath()
+          },
+          successCallbacks: [callbacks.onSuccess],
+          failureCallbacks: [callbacks.onFailure]
+        });
       case "PreviewFileView":
         return steroids.nativeBridge.nativeCall({
           method: "previewFile",
           parameters: {
-            filenameWithPath: view.getNativeFilePath()
+            filePath: view.getNativeFilePath()
           },
           successCallbacks: [callbacks.onSuccess],
           failureCallbacks: [callbacks.onFailure]
@@ -2651,6 +2663,76 @@ TabBar = (function(_super) {
   return TabBar;
 
 })(EventsSupport);
+;var Transitions;
+
+Transitions = (function() {
+  function Transitions() {}
+
+  Transitions.prototype.push = function(options, callbacks) {
+    var parameters;
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    parameters = {
+      navigationBar: options.navigationBar
+    };
+    if (options.animation) {
+      parameters.pushAnimation = options.animation.transition;
+      parameters.pushAnimationDuration = options.animation.duration;
+      parameters.pushAnimationCurve = options.animation.curve;
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "performTransitionPush",
+      parameters: parameters,
+      successCallbacks: [callbacks.onSuccess, callbacks.onAnimationStarted],
+      recurringCallbacks: [callbacks.onAnimationEnded],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  Transitions.prototype.pop = function(options, callbacks) {
+    var parameters;
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    parameters = {};
+    if (options.animation) {
+      parameters.popAnimation = options.animation.transition;
+      parameters.popAnimationDuration = options.animation.duration;
+      parameters.popAnimationCurve = options.animation.curve;
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "performTransitionPop",
+      parameters: parameters,
+      successCallbacks: [callbacks.onSuccess, callbacks.onAnimationStarted],
+      recurringCallbacks: [callbacks.onAnimationEnded],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  Transitions.prototype.removeStaticContainer = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "removeStaticContainerFromLayer",
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  return Transitions;
+
+})();
 ;var WebView,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -2663,6 +2745,8 @@ WebView = (function(_super) {
 
   WebView.prototype.id = null;
 
+  WebView.prototype.uuid = null;
+
   WebView.prototype.location = null;
 
   WebView.prototype.navigationBar = new NavigationBar;
@@ -2671,12 +2755,13 @@ WebView = (function(_super) {
     if (options == null) {
       options = {};
     }
-    WebView.__super__.constructor.call(this, "webview", ["created", "preloaded", "unloaded"]);
+    WebView.__super__.constructor.call(this, "webview", ["created", "preloaded", "unloaded", "blocked"]);
     this.location = options.constructor.name === "String" ? options : options.location;
     if (options._parameters != null) {
       this.setParams(options._parameters);
     }
     this.id = options.id != null ? options.id : void 0;
+    this.uuid = options.uuid != null ? options.uuid : void 0;
     if (this.location.indexOf("://") === -1) {
       if (window.location.href.indexOf("file://") === -1) {
         this.location = "" + window.location.protocol + "//" + window.location.host + "/" + this.location;
@@ -2774,7 +2859,8 @@ WebView = (function(_super) {
     }
     return steroids.nativeBridge.nativeCall({
       method: "removeTransitionHelper",
-      successCallbacks: [callbacks.onSuccess],
+      successCallbacks: [callbacks.onSuccess, callbacks.onAnimationStarted],
+      recurringCallbacks: [callbacks.onAnimationEnded],
       failureCallbacks: [callbacks.onFailure]
     });
   };
@@ -2788,7 +2874,13 @@ WebView = (function(_super) {
     }
     return steroids.nativeBridge.nativeCall({
       method: "displayTransitionHelper",
-      successCallbacks: [callbacks.onSuccess],
+      parameters: {
+        transition: options.transition,
+        curve: options.curve,
+        duration: options.duration
+      },
+      successCallbacks: [callbacks.onSuccess, callbacks.onAnimationStarted],
+      recurringCallbacks: [callbacks.onAnimationEnded],
       failureCallbacks: [callbacks.onFailure]
     });
   };
@@ -2912,7 +3004,11 @@ PreviewFileView = (function() {
   }
 
   PreviewFileView.prototype.getNativeFilePath = function() {
-    return "" + this.relativeTo + "/" + this.filePath;
+    if (/^http.*/.test(this.filePath)) {
+      return this.filePath;
+    } else {
+      return "" + this.relativeTo + "/" + this.filePath;
+    }
   };
 
   return PreviewFileView;
@@ -3985,15 +4081,82 @@ PostMessage = (function() {
   return PostMessage;
 
 }).call(this);
+;var MediaGalleryView,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+MediaGalleryView = (function() {
+  function MediaGalleryView(options) {
+    var _ref;
+    if (options == null) {
+      options = {};
+    }
+    this.getNativeFilePath = __bind(this.getNativeFilePath, this);
+    this.files = options.constructor.name === "Array" ? options : options.files;
+    this.relativeTo = (_ref = options.relativeTo) != null ? _ref : steroids.app.path;
+  }
+
+  MediaGalleryView.prototype.getNativeFilePath = function() {
+    var _this = this;
+    return this.files.map(function(file) {
+      if (/^http.*/.test(file)) {
+        return file;
+      } else {
+        return "" + _this.relativeTo + "/" + file;
+      }
+    });
+  };
+
+  return MediaGalleryView;
+
+})();
+;var Spinner;
+
+Spinner = (function() {
+  function Spinner() {}
+
+  Spinner.prototype.show = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "showSpinner",
+      parameters: options,
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  Spinner.prototype.hide = function(options, callbacks) {
+    if (options == null) {
+      options = {};
+    }
+    if (callbacks == null) {
+      callbacks = {};
+    }
+    return steroids.nativeBridge.nativeCall({
+      method: "hideSpinner",
+      parameters: options,
+      successCallbacks: [callbacks.onSuccess],
+      failureCallbacks: [callbacks.onFailure]
+    });
+  };
+
+  return Spinner;
+
+})();
 ;var _this = this;
 
 window.steroids = {
-  version: "3.5.14",
+  version: "3.5.16",
   Animation: Animation,
   File: File,
   views: {
     WebView: WebView,
     PreviewFileView: PreviewFileView,
+    MediaGalleryView: MediaGalleryView,
     MapView: MapView
   },
   buttons: {
@@ -4111,6 +4274,8 @@ window.steroids.statusBar = new StatusBar;
 
 window.steroids.tabBar = new TabBar;
 
+window.steroids.transitions = new Transitions;
+
 window.steroids.device = new Device;
 
 window.steroids.analytics = new Analytics;
@@ -4120,6 +4285,8 @@ window.steroids.screen = new Screen;
 window.steroids.notifications = new Notifications;
 
 window.steroids.splashscreen = new Splashscreen;
+
+window.steroids.spinner = new Spinner;
 
 window.steroids.PostMessage = PostMessage;
 

@@ -33,17 +33,55 @@
 
 <div ng-controller="NewController">
   <super-navbar>
-    <super-navbar-button ng-click="cancel()">
-      Cancel
-    </super-navbar-button>
+    
     <super-navbar-title>
       New Event
     </super-navbar-title>
   </super-navbar>
 
   <div class="padding">
-    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
-    <form ng-hide="showSpinner" ng-submit="submitForm()" ng-include="'_form.html'"></form>
+    <form ng-submit="submitForm()">
+        <div class="list">
+
+  
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Food</span>
+    <input type="text" ng-model="event['Food']">
+  </label>
+  
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Who</span>
+    <input type="text" ng-model="event['Who']">
+  </label>
+  
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Time</span>
+    <input type="time" ng-model="event['Time']">
+  </label>
+  
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Date</span>
+    <input type="date" ng-model="event['Date']">
+  </label>
+  
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Location</span></br>
+    <input type="text" ng-model="event['Location']">
+  </label>
+  
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Organization</span>
+    <input type="text" ng-model="event['Organization']">
+  </label>
+  
+
+  <br>
+ <super-navigate location="event#index">
+  <button class="button button-block button-positive" >Save</button>
+            </super-navigate>
+</div>
+      
+      </form>
   </div>
 </div>
 

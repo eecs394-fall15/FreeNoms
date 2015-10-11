@@ -50,19 +50,25 @@
              </div>
              <div class="item item-avatar">
                  <img src="/icons/date_icon.png">
-                 <h2 ng-bind="event['Date']"></h2>
+                 <h2 ng-bind="event['Date'] | date: 'MM/dd/yyyy'"></h2>
              </div>
              <div class="item item-avatar">
                  <img src="/icons/time_icon.png">
-                 <h2 ng-bind="event['Time']"></h2>
+                 <h2 ng-bind="event['Time'] | date: 'shortTime'"></h2>
              </div>
-             <div class="item item-avatar">
+
+             <div class="item item-avatar">      
                  <img src="/icons/location_icon.png">
+                 <a ng-href="{{loadGoogleMaps()}}"  style="text-decoration:none">
                  <h2 ng-bind="event['Location']"></h2>
+                 </a>
              </div>
+             
              <div class="item item-avatar">
                  <img src="/icons/org_icon.png">
+                 <a ng-href="{{event['Website']}}" style="text-decoration:none">
                  <h2 ng-bind="event['Organization']"></h2>
+                 </a>
              </div>
              </div>
       
