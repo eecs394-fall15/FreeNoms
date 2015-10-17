@@ -19,9 +19,6 @@ window.ag.data = {
           "Who": {
             "type": "string"
           },
-          "Time": {
-            "type": "string"
-          },
           "Date": {
             "type": "string"
           },
@@ -34,10 +31,10 @@ window.ag.data = {
           "Website": {
             "type": "string"
           },
-          "Start Time": {
+          "StartTime": {
             "type": "string"
           },
-          "End Time": {
+          "EndTime": {
             "type": "string"
           },
           "id": {

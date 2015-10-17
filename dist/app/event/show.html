@@ -44,32 +44,50 @@
       
       
          <div class="list card">
+             <div class="item item-text-wrap">
              <div class="item item-avatar">
                  <img src="/icons/who_icon.png" style="width:40px;height:40px;">
                  <h2 ng-bind="event['Who']"></h2>
              </div>
+             </div>
+        
+             <div class="item item-text-wrap">
              <div class="item item-avatar">
                  <img src="/icons/date_icon.png">
                  <h2 ng-bind="event['Date'] | date: 'MM/dd/yyyy'"></h2>
              </div>
+             </div>
+        
+             <div class="item item-text-wrap">
              <div class="item item-avatar">
                  <img src="/icons/time_icon.png">
-                 <h2 ng-bind="event['Time'] | date: 'shortTime'"></h2>
+                 <span ng-bind="event['StartTime'] | date: 'shortTime' "></span>
+                 <span ng-bind="event['EndTime'] | date: 'shortTime' "></span>
+             </div>
              </div>
 
+             <div class="item item-text-wrap">
              <div class="item item-avatar">      
                  <img src="/icons/location_icon.png">
                  <a ng-href="{{loadGoogleMaps()}}"  style="text-decoration:none">
                  <h2 ng-bind="event['Location']"></h2>
                  </a>
              </div>
-             
+             </div>
+    
+             <div class="item item-text-wrap">
              <div class="item item-avatar">
                  <img src="/icons/org_icon.png">
                  <a ng-href="{{event['Website']}}" style="text-decoration:none">
                  <h2 ng-bind="event['Organization']"></h2>
                  </a>
              </div>
+             </div>
+             
+            <div class="item item-text-wrap">
+                 <h2 ng-bind="event['Description']"></h2>
+             </div>
+    
              </div>
       
 
