@@ -45,7 +45,7 @@ angular
                             time=hour+":"+minute+" PM";
                         }
                     }
-                    var message = "<b>"+event.Food+"</b><br>"+month+"/"+day+"/"+year+"<br>"+time+"<br>";
+                    var message = "<b>"+event.Food+"</b><br>"+month+"/"+day+"/"+year+"<br>"+time+"<br><super-modal-show data-params-id='"+event.id+"' location='event#show'> <button style='height:5px' class='button button-small button-positive'> More Info</button> </super-modal-show>";
                     geocoder.geocode ( {"address": event.Location }, callback(message));
                 }
             }); 
