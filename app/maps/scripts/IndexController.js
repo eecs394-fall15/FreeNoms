@@ -29,7 +29,24 @@ angular
                     var event = allEvents[i];
                     var geocoder = new google.maps.Geocoder(); 
     
-                    geocoder.geocode ( {"address": event.Location }, callback(event.Food));
+                    var dateObj = new Date(event.Date);
+                    if (!!dateObj.valueOf()){
+                        var year = dateObj.getFullYear();
+                        var month = dateObj.getMonth()+1; 
+                        var day = dateObj.getDate(); 
+                    }
+                    var timeObj = new Date(event.StartTime); 
+                    if (!!dateObj.valueOf()){
+                        var hour = timeObj.getHours();
+                        var minute = (timeObj.getMinutes() < 10 ? '0' : '')+timeObj.getMinutes();;
+                        var time=hour+":"+minute+" AM";
+                        if (hour > 12){
+                            hour-=12; 
+                            time=hour+":"+minute+" PM";
+                        }
+                    }
+                    var message = "<b>"+event.Food+"</b><br>"+month+"/"+day+"/"+year+"<br>"+time+"<br>";
+                    geocoder.geocode ( {"address": event.Location }, callback(message));
                 }
             }); 
             supersonic.device.geolocation.getPosition().then(function(currposition){
