@@ -4,6 +4,8 @@ angular
     $scope.event = {};
 
     $scope.submitForm = function () {
+    var location = document.getElementById('tags').value;
+        $scope.event.Location = location; 
       $scope.showSpinner = true;
       newevent = new Event($scope.event);
       newevent.save().then( function () {
