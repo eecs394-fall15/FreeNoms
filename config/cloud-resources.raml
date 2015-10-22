@@ -16,8 +16,8 @@ traits:
             default: 80252
   
 schemas:
-  - Event_collection: '{"$schema":"http://json-schema.org/schema","title":"Event collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Event representation","properties":{"Food":{"type":"string"},"Who":{"type":"string"},"Date":{"type":"string"},"Location":{"type":"string"},"Organization":{"type":"string"},"Website":{"type":"string"},"StartTime":{"type":"string"},"EndTime":{"type":"string"}},"required":[]}}}}'
-  - Event_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Event representation","properties":{"object":{"type":"object","properties":{"Food":{"type":"string"},"Who":{"type":"string"},"Date":{"type":"string"},"Location":{"type":"string"},"Organization":{"type":"string"},"Website":{"type":"string"},"StartTime":{"type":"string"},"EndTime":{"type":"string"}},"required":[]}}}'
+  - Event_collection: '{"$schema":"http://json-schema.org/schema","title":"Event collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Event representation","properties":{"Food":{"type":"string"},"Who":{"type":"string"},"Date":{"type":"string"},"Location":{"type":"string"},"Organization":{"type":"string"},"Website":{"type":"string"},"StartTime":{"type":"string"},"EndTime":{"type":"string"},"Description":{"type":"string"},"Address":{"type":"string"},"Room":{"type":"string"}},"required":[]}}}}'
+  - Event_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Event representation","properties":{"object":{"type":"object","properties":{"Food":{"type":"string"},"Who":{"type":"string"},"Date":{"type":"string"},"Location":{"type":"string"},"Organization":{"type":"string"},"Website":{"type":"string"},"StartTime":{"type":"string"},"EndTime":{"type":"string"},"Description":{"type":"string"},"Address":{"type":"string"},"Room":{"type":"string"}},"required":[]}}}'
   - Events_collection: '{"$schema":"http://json-schema.org/schema","title":"Events collection","type":"object","properties":{"results":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Events representation","properties":{"Date":{"type":"object"},"Food":{"type":"string"},"Location":{"type":"string"},"Organization":{"type":"string"},"Time":{"type":"object"},"Who":{"type":"string"},"createdAt":{"type":"string"},"objectId":{"type":"string"},"updatedAt":{"type":"string"}},"required":[]}}}}'
   - Events_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Events representation","properties":{"Date":{"type":"object"},"Food":{"type":"string"},"Location":{"type":"string"},"Organization":{"type":"string"},"Time":{"type":"object"},"Who":{"type":"string"},"createdAt":{"type":"string"},"objectId":{"type":"string"},"updatedAt":{"type":"string"}},"required":[]}'
 
@@ -186,5 +186,8 @@ resourceTypes:
   type: parse_collection
   /{id}:
     type: parse_member
+
+
+
 
 
