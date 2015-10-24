@@ -50,11 +50,10 @@ angular
                 }
             }); 
             supersonic.device.geolocation.getPosition().then(function(currposition){
-                    var image = "/icons/current_marker.png";
+                     var image = "/icons/me_icon.png";
                     var currentLocation = new google.maps.LatLng(currposition.coords.latitude, currposition.coords.longitude);
-               // var marker = new google.maps.Marker({position: currentLocation, map : map});
-                    var marker = new google.maps.Marker({position: currentLocation, map : map, icon: image});
-                 //   map.panTo(currentLocation); 
+                    var marker = new google.maps.Marker({position: currentLocation, map : map, icon: image, animation: google.maps.Animation.DROP});
+                    map.setCenter(currentLocation); 
             }); 
 			});
   });
