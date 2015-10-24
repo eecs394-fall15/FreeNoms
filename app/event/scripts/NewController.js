@@ -17,7 +17,7 @@ angular
       newevent = new Event($scope.event);
       newevent.save().then( function () {
         supersonic.ui.modal.hide();
-        $location = 'views/index.html';
+        window.open('index.html','_self');
       });
     };
 

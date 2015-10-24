@@ -39,6 +39,37 @@
     </super-navbar-title>
   </super-navbar>
 
+<head>
+  <script>
+  window.addEventListener('WebComponentsReady', function() {
+    supersonic.app.splashscreen.hide();
+  });
+  </script>
+  <!-- Cloud resource definition file for Supersonic Data -->
+  <script src="/cloud-resources.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    var availableTags = [
+      "Tech",
+      "Norris",
+      "Ford",
+      "Plex",
+      "Elder",
+      "Allison",
+      "Lakefill"
+    ];
+
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
+</head>
+
   <div class="padding">
     <form ng-submit="submitForm()">
         <div class="list">
@@ -46,17 +77,17 @@
   
   <label class="item item-input item-stacked-label">
     <span class="input-label">Food</span>
-    <input type="text" ng-model="event['Food']">
+    <input type="text" ng-model="event['Food']" required>
   </label>
   
   <label class="item item-input item-stacked-label">
     <span class="input-label">Who</span>
-    <input type="text" ng-model="event['Who']">
+    <input type="text" ng-model="event['Who']" required> 
   </label>
   
   <label class="item item-input item-stacked-label">
     <span class="input-label">Start Time</span>
-    <input type="time" ng-model="event['StartTime']">
+    <input type="time" ng-model="event['StartTime']" required>
   </label>
             
   <label class="item item-input item-stacked-label">
@@ -66,13 +97,12 @@
   
   <label class="item item-input item-stacked-label">
     <span class="input-label">Date</span>
-    <input type="date" ng-model="event['Date']">
-  </label>
+    <input type="date" ng-model="event['Date']" required>
+  </label>  
   
   <label class="item item-input item-stacked-label">
-    <span class="input-label">Location</span></br>
-    <span class="input-label">(Eg:Technological Institute, Evanston)</span>
-    <input type="text" ng-model="event['Location']">
+    <span class="input-label">Location</span>
+    <input type="text" id="tags" required>
   </label>
   
   <label class="item item-input item-stacked-label">
@@ -91,9 +121,9 @@
   </label>
 
   <br>
- <super-navigate location="event#index">
+ <div class="item item-input-inset">
   <button class="button button-block button-positive" >Save</button>
-            </super-navigate>
+   </div> 
 </div>
       
       </form>

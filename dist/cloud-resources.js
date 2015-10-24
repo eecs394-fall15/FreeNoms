@@ -37,6 +37,15 @@ window.ag.data = {
           "EndTime": {
             "type": "string"
           },
+          "Description": {
+            "type": "string"
+          },
+          "Address": {
+            "type": "string"
+          },
+          "Room": {
+            "type": "string"
+          },
           "id": {
             "type": "string",
             "identity": true
