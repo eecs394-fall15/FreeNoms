@@ -29,6 +29,7 @@
              <div class="item item-avatar">
                  <img src="/icons/time_icon.png">
                  <span ng-bind="event['StartTime'] | date: 'shortTime' "></span>
+                  <span>{{event['EndTime'] ? ' - ' : ''}}</span>
                  <span ng-bind="event['EndTime'] | date: 'shortTime' "></span>
              </div>
              </div>
