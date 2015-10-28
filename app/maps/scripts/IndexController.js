@@ -28,15 +28,19 @@ angular
                 for (i = 0; i < allEvents.length; i++) {
                     var event = allEvents[i];
                     var geocoder = new google.maps.Geocoder(); 
-    
                     var dateObj = new Date(event.Date);
-                    if (dateObj.valueOf() >= Date.now()){
+                    var today = false; 
+                    if (dateObj.valueOf()){
+                        var todayObj = new Date(); 
                         var year = dateObj.getFullYear();
                         var month = dateObj.getMonth()+1; 
                         var day = dateObj.getDate(); 
+                        today = (year == todayObj.getFullYear()) && (month == (todayObj.getMonth()+1)) && (day == todayObj.getDate()); 
                     }
+                    
+                    if (event['Address'] && today){
                     var timeObj = new Date(event.StartTime); 
-                    if (dateObj.valueOf() >= Date.now()){
+                    if (dateObj.valueOf()){
                         var hour = timeObj.getHours();
                         var minute = (timeObj.getMinutes() < 10 ? '0' : '')+timeObj.getMinutes();;
                         var time=hour+":"+minute+" AM";
@@ -48,6 +52,7 @@ angular
                     var message = "<b>"+event.Food+"</b><br>"+month+"/"+day+"/"+year+"<br>"+time+"<br><super-modal-show data-params-id='"+event.id+"' location='event#show'> <button style='height:5px' class='button button-small button-positive'> More Info</button> </super-modal-show>";
                     geocoder.geocode ( {"address": event.Address }, callback(message));
                 }
+                }
             }); 
             supersonic.device.geolocation.getPosition().then(function(currposition){
                      var image = "/icons/me_icon.png";
@@ -57,3 +62,4 @@ angular
             }); 
 			});
   });
+
