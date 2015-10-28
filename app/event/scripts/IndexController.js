@@ -13,6 +13,14 @@ angular
       supersonic.ui.layers.push(view);
       }
     });
+
+    var options = {
+      title: "CampusNoms",
+      overrideBackButton: true,
+      buttons: {
+      left: [leftButton]
+      }
+    };
     
     Event.all().whenChanged( function (events) {
         $scope.$apply( function () {
