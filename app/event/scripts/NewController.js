@@ -32,7 +32,7 @@ angular
       newevent = new Event($scope.event);
       newevent.save().then( function () {
         supersonic.ui.modal.hide();
-        window.open('index.html','_self');
+        supersonic.ui.layers.pop()
       });
     };
 
