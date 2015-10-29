@@ -24,6 +24,34 @@ angular
       "University Hall": "1897 Sheridan Road Evanston, IL 60208"              
     //  "Lakefill"  
     };
+    $scope.checkForm = function () {
+        var errors = 0;
+        var message="";
+        if (!$scope.event['Food']) {
+            message+="\nFood";
+            errors++;
+        }
+        if (!$scope.event['StartTime']){
+           message+="\nStart Time";
+            errors++;
+        }
+        if (!$scope.event['Date']){
+           message+="\nDate";
+            errors++;
+        }
+        if (document.getElementById('tags').value == ""){
+            message+="\nLocation";
+            errors++;
+        }
+        if (errors > 0){
+         var errorMessage="Missing the following required fields:"+ message;
+         supersonic.ui.dialog.alert(errorMessage); 
+        }
+        else {
+           $scope.submitForm();
+        }
+    }
+    
     $scope.submitForm = function () {
     var location = document.getElementById('tags').value;
         $scope.event.Location = location; 
